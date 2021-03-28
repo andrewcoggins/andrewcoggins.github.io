@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/home/app
+    command: flask run --host=0.0.0.0
+    environment:
+      - FLASK_APP=/home/app/app/runserver.py
+      - FLASK_CONFIG=/home/app/config/development.cfg
+      - FLASK_DEBUG=1
+      - LB_SCHEME=internal
+      - PYTHONUNBUFFERED=true
+      - SESSION_COOKIE_SECURE_DISABLE=true
